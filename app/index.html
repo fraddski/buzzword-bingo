@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Buzzword Bingo</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="site.css"></link>
+  </head>
+  <body ng-app="bingo" ng-controller="gameController as gameCtrl">
+
+    <header ng-class="{small:gameCtrl.game.isStarted}">
+      <h1>Buzzword Bingo</h1>
+      <button type="button" ng-click="gameCtrl.newGame()">New game</button>
+    </header>
+
+    <div ng-show="gameCtrl.game.isOver" ng-class="{bingo:gameCtrl.game.isOver}" role="alert">Bingo!</div>
+
+    <ul id="gameBoard" ng-show="gameCtrl.game.words.length > 0" ng-class="{done:gameCtrl.game.isOver}" set-focus="newGameStarted" tabindex="-1">
+      <li ng-repeat="itm in gameCtrl.game.words" class="tile" ng-class="{called:itm.isCalled}" ng-click="gameCtrl.wordCalled(itm)" ng-keypress="gameCtrl.wordCalled(itm)" title="{{itm.word + (itm.isCalled ? ': called' : '')}}" tabindex="{{itm.isCalled ? '-1' : '0'}}">
+        {{itm.word}}
+      </li>
+    </ul>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-touch.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
